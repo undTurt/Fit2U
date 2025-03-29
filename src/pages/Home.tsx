@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shirt, Calendar, Brain, BarChart3, Users, ShoppingBag } from 'lucide-react';
 
@@ -46,7 +45,7 @@ function Home() {
           Organize, plan, and elevate your style with AI-powered insights
         </p>
         <Link
-          to="/auth"
+          to="/closet"
           className="bg-white text-blue-500 px-8 py-3 rounded-full font-semibold hover:bg-gray-100"
         >
           Get Started
