@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.masonry {
+  column-count: 6; /* Default to 6 columns */
+  column-gap: 0; /* No gap between columns */
+}
+
+.masonry-item {
+  display: inline-block; /* Ensure items flow properly in columns */
+  margin-bottom: 0; /* Remove vertical gaps */
+  width: 100%; /* Ensure items take full column width */
+  break-inside: avoid; /* Prevent items from breaking across columns */
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
