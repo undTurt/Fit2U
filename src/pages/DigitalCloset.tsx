@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Plus, Upload, Pencil, Trash2 } from 'lucide-react';
 import { useClosetStore } from '../store/closetStore';
