@@ -126,6 +126,68 @@ function MyOutfits() {
         <h1 className="text-2xl font-bold text-[#1C2541]">My Outfits</h1>
       </div>
 
+      {/* MOVED: My Outfits Section - Now displayed first */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">My Outfits</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {outfits.map((outfit) => (
+            <div key={outfit.id} className="bg-white p-4 border rounded-md shadow-sm hover:shadow-md transition-shadow relative">
+              <button 
+                onClick={() => deleteOutfit(outfit.id)}
+                className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200"
+              >
+                <Trash2 className="w-4 h-4 text-red-500" />
+              </button>
+              
+              <h3 className="text-lg font-bold">{outfit.name}</h3>
+              <p className="text-sm text-gray-500 mb-2">{outfit.category}</p>
+              
+              {/* Color palette */}
+              <div className="flex flex-wrap gap-1 mb-3">
+                {outfit.colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className="w-5 h-5 rounded-full border border-gray-300"
+                    style={{ backgroundColor: color }}
+                  ></div>
+                ))}
+              </div>
+              
+              {/* Outfit items grid - maintain aspect ratio without cropping */}
+              <div className="grid grid-cols-3 gap-2">
+                {outfit.items.map((itemId) => {
+                  const item = items.find((i) => i.id === itemId);
+                  return item ? (
+                    <div key={item.id} className="aspect-square relative bg-gray-50 rounded overflow-hidden">
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className="w-full h-full object-contain"
+                        title={item.name}
+                      />
+                    </div>
+                  ) : (
+                    <div 
+                      key={itemId} 
+                      className="aspect-square bg-gray-200 rounded-md flex items-center justify-center"
+                    >
+                      <span className="text-xs text-gray-500">Item not found</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+          
+          {outfits.length === 0 && (
+            <div className="col-span-full text-center py-8 bg-gray-50 rounded-md">
+              <p className="text-gray-500">No outfits created yet. Create a new outfit below!</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Create a New Outfit Section - Now displayed after saved outfits */}
       <div className="mb-8 p-4 border rounded-md bg-gray-50">
         <h2 className="text-xl font-semibold mb-4 text-[#1C2541]">Create a New Outfit</h2>
         <div className="flex gap-4 flex-wrap">
@@ -217,66 +279,6 @@ function MyOutfits() {
             />
           </div>
         ))}
-      </div>
-
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">My Outfits</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {outfits.map((outfit) => (
-            <div key={outfit.id} className="bg-white p-4 border rounded-md shadow-sm hover:shadow-md transition-shadow relative">
-              <button 
-                onClick={() => deleteOutfit(outfit.id)}
-                className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200"
-              >
-                <Trash2 className="w-4 h-4 text-red-500" />
-              </button>
-              
-              <h3 className="text-lg font-bold">{outfit.name}</h3>
-              <p className="text-sm text-gray-500 mb-2">{outfit.category}</p>
-              
-              {/* Color palette */}
-              <div className="flex flex-wrap gap-1 mb-3">
-                {outfit.colors.map((color, index) => (
-                  <div
-                    key={index}
-                    className="w-5 h-5 rounded-full border border-gray-300"
-                    style={{ backgroundColor: color }}
-                  ></div>
-                ))}
-              </div>
-              
-              {/* Outfit items grid - maintain aspect ratio without cropping */}
-              <div className="grid grid-cols-3 gap-2">
-                {outfit.items.map((itemId) => {
-                  const item = items.find((i) => i.id === itemId);
-                  return item ? (
-                    <div key={item.id} className="aspect-square relative bg-gray-50 rounded overflow-hidden">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className="w-full h-full object-contain" // object-contain instead of object-cover
-                        title={item.name}
-                      />
-                    </div>
-                  ) : (
-                    <div 
-                      key={itemId} 
-                      className="aspect-square bg-gray-200 rounded-md flex items-center justify-center"
-                    >
-                      <span className="text-xs text-gray-500">Item not found</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-          
-          {outfits.length === 0 && (
-            <div className="col-span-full text-center py-8 bg-gray-50 rounded-md">
-              <p className="text-gray-500">No outfits created yet. Create your first outfit above!</p>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

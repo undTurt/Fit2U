@@ -89,7 +89,11 @@ function Trading() {
     setDonationPile(prev => prev.filter(id => id !== itemId));
   };
 
+  // Get valid donation items (filter out items that no longer exist in the closet)
   const donatedItems = items.filter(item => donationPile.includes(item.id));
+  
+  // Use the actual filtered items count for the button display, not just the IDs in the array
+  const donationPileCount = donatedItems.length;
 
   return (
     <div className="container mx-auto px-4 py-6 bg-[#FFFFFF] min-h-[calc(100vh-4rem)]">
@@ -99,7 +103,7 @@ function Trading() {
           onClick={() => setShowDonationPile(!showDonationPile)}
           className="px-4 py-2 bg-[#1C2541] text-[#F2EDEB] rounded-md hover:bg-[#B76D68] transition-colors"
         >
-          {showDonationPile ? 'Back to Donation' : `Donation Pile (${donationPile.length})`}
+          {showDonationPile ? 'Back to Donation' : `Donation Pile (${donationPileCount})`}
         </button>
       </div>
 

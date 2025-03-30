@@ -16,7 +16,7 @@ function Search() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFFFF] min-h-[calc(100vh-4rem)]">
       <h1 className="text-2xl font-bold mb-8 text-[#1C2541]">Search</h1>
       <div className="mb-4">
         <input

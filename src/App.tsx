@@ -6,6 +6,7 @@ import MyOutfits from './pages/MyOutfits';
 import OutfitGenerator from './pages/OutfitGenerator';
 import Trading from './pages/Trading';
 import Search from './pages/Search';
+import ColorFitQuiz from './components/ColorFitQuiz';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/outfit-generator" element={<OutfitGenerator />} />
             <Route path="/trading" element={<Trading />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/color-fit-quiz" element={<ColorFitQuiz onClose={() => {}} onPaletteGenerated={(palette) => {}} />} />
           </Routes>
         </main>
       </div>

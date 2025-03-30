@@ -1,7 +1,36 @@
 import { Link } from 'react-router-dom';
 import { RefreshCw, Search, DollarSign, Palette, CloudRain, User } from 'lucide-react';
 import RotatingText from '../components/RotatingText';
-import SplitText from '../components/ReactBits/SplitText'; // Import SplitText
+import SplitText from '../components/ReactBits/SplitText';
+import GridMotion from '../components/ReactBits/GridMotion'; // Import GridMotion
+const items = [
+  "/clothes_images/Baggy Lightwash Jeans.png",
+  "/clothes_images/Black Beanie.png",
+  "/clothes_images/Black Blazer.png",
+  "/clothes_images/Black Bucket Hat.png",
+  "/clothes_images/Black Button-Up.png",
+  "/clothes_images/Black Cap.png",
+  "/clothes_images/Black Jeans.png",
+  "/clothes_images/Black Samba Sneakers.png",
+  "/clothes_images/Dark Green Beanie.png",
+  "/clothes_images/Dark Green Hoodie.png",
+  "/clothes_images/gold chain.png",
+  "/clothes_images/gold watch.png",
+  "/clothes_images/Grey Sweater.png",
+  "/clothes_images/Khaki Cargos.png",
+  "/clothes_images/Light brown t-shirt.png",
+  "/clothes_images/Navy Blazer.png",
+  "/clothes_images/Navy Blue Yankees Cap.png",
+  "/clothes_images/Onitsuka Tiger Sneakers.png",
+  "/clothes_images/Red Cap.png",
+  "/clothes_images/Baggy Lightwash Jeans.png",
+  "/clothes_images/Black Beanie.png",
+  "/clothes_images/Black Blazer.png",
+  "/clothes_images/Black Bucket Hat.png",
+  "/clothes_images/Black Button-Up.png",
+
+];
+
 
 function Home() {
   const features = [
@@ -50,9 +79,9 @@ function Home() {
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-[#FFFFFF]">
       {/* Hero Section */}
-      <div className="text-center py-24 md:py-32 bg-[#1C2541] text-[#F2EDEB]">
-        <div className="flex flex-col items-center justify-center space-y-6">
-          {/* Rotating Text */}
+      <div className="relative text-center py-16 md:py-20 bg-[#1C2541] text-[#F2EDEB]">
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center space-y-6">
           <h1 className="text-4xl font-bold flex items-center space-x-2">
             <span className="relative left-[-10px]">Your</span>
             <RotatingText
@@ -82,14 +111,26 @@ function Home() {
         </div>
       </div>
 
-      {/* Digital Closet Button */}
-      <div className="text-center py-8 bg-[#FFFFFFF]">
-        <Link
-          to="/closet"
-          className="bg-[#1C2541] text-[#F2EDEB] px-8 py-3 rounded-full font-semibold hover:bg-[#B76D68] transition-colors"
-        >
-          Open Your Digital Wardrobe
-        </Link>
+      {/* Digital Closet Section with GridMotion Background */}
+      <div className="relative py-48 bg-white"> {/* Changed background to white */}
+        <div className="absolute inset-0 z-0">
+          <GridMotion
+            items={items} // Ensure items is passed correctly
+            gradientColor="white" // Set gradientColor to white
+          />
+        </div>
+        <div className="relative z-10 text-center">
+          <Link
+            to="/closet"
+            className="text-lg font-semibold px-8 py-4 rounded-full transition-transform transform hover:scale-105"
+            style={{
+              background: "linear-gradient(90deg, #B76D68, #B76D68)",
+              color: "#F2EDEB",
+            }}
+          >
+            Open Your Digital Wardrobe
+          </Link>
+        </div>
       </div>
 
       {/* Features Section */}
@@ -100,6 +141,7 @@ function Home() {
             <div
               key={feature.title}
               className="bg-[#FFFFF p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              style={{ backgroundImage: `url('/default_image.png')` }}
             >
               <feature.icon className="w-12 h-12 text-[#1C2541] mb-4" />
               <h2 className="text-xl font-semibold mb-2 text-black">{feature.title}</h2>

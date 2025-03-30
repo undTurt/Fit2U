@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 interface ColorFitQuizProps {
   onClose: () => void;
-  onPaletteGenerated: (palette: string[]) => void;
+  onPaletteGenerated: (palette: string[], description: string) => void;
 }
 
 const ColorFitQuiz: React.FC<ColorFitQuizProps> = ({ onClose, onPaletteGenerated }) => {
@@ -80,18 +80,34 @@ const ColorFitQuiz: React.FC<ColorFitQuizProps> = ({ onClose, onPaletteGenerated
   };
 
   const calculateSeason = () => {
-    // Simplified logic for determining seasonal palette
     const warmAnswers = ["Warm undertones", "Warm, golden undertone", "Gold and rose gold", "Green"];
     const coolAnswers = ["Light undertone, cool", "Cool or olive undertone", "Silver", "Blue"];
 
     const warmCount = answers.filter((answer) => warmAnswers.includes(answer)).length;
     const coolCount = answers.filter((answer) => coolAnswers.includes(answer)).length;
 
+    let palette = [];
+    let description = "";
+
     if (warmCount > coolCount) {
-      onPaletteGenerated(["#FF7F50", "#FFD700", "#8B4513"]); // Autumn palette
+      if (answers.includes("Burns Easily, rarely or only slightly tans")) {
+        palette = ["#FF7F50", "#FFD700", "#8B4513"]; // Autumn palette
+        description = "You have warm undertones with rich, earthy features. Your palette embraces warm, deep colors like olive green, burnt orange, and chocolate brown.";
+      } else {
+        palette = ["#FFDAB9", "#FFA07A", "#FFE4B5"]; // Spring palette
+        description = "You have warm undertones with clear, bright features. Your palette features warm, light colors such as peach, coral, and sunny yellow.";
+      }
     } else {
-      onPaletteGenerated(["#87CEEB", "#4682B4", "#B0E0E6"]); // Winter palette
+      if (answers.includes("Burns Easily, rarely or only slightly tans")) {
+        palette = ["#87CEEB", "#4682B4", "#B0E0E6"]; // Winter palette
+        description = "You have cool undertones with high contrast between your skin, hair, and eyes. Your palette includes bold, cool colors like icy blues, stark blacks, and bright jewel tones.";
+      } else {
+        palette = ["#E6E6FA", "#D8BFD8", "#B0C4DE"]; // Summer palette
+        description = "You have cool undertones with softer, muted features. Your palette includes cool, pastel shades like lavender, soft pink, and powder blue.";
+      }
     }
+
+    onPaletteGenerated(palette, description); // Pass both palette and description
   };
 
   return (
