@@ -78,7 +78,9 @@ function Trading() {
     if (currentItemIndex < activeItems.length - 1) {
       setCurrentItemIndex(prev => prev + 1);
     } else {
-      // If it's the last item, reset the swipe direction
+      // Set current index to activeItems.length to trigger the "no more items" state
+      setCurrentItemIndex(activeItems.length);
+      // Reset the swipe direction
       setSwipeDirection(null);
     }
   };
@@ -90,7 +92,7 @@ function Trading() {
   const donatedItems = items.filter(item => donationPile.includes(item.id));
 
   return (
-    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFFFF] min-h-[calc(100vh-4rem)]">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-[#1C2541]">Donation Center</h1>
         <button
@@ -110,36 +112,44 @@ function Trading() {
         <div className="flex flex-col items-center">
           {activeItems.length > 0 && currentItemIndex < activeItems.length ? (
             <>
-              <div className="w-full max-w-sm mb-6">
+              <div className="w-full max-w-[500px] mb-10 relative"> {/* Increased bottom margin */}
                 <p className="text-center text-gray-500 mb-2">
                   Swipe left to donate, right to keep
                 </p>
-                <SwipeableItemCard 
-                  item={activeItems[currentItemIndex]} 
-                  onSwipeLeft={handleDonate}
-                  onSwipeRight={handleKeep}
-                />
-              </div>
-              
-              <div className="flex justify-center space-x-4 mt-4">
-                <button
-                  onClick={() => handleDonate(activeItems[currentItemIndex].id)}
-                  className="flex items-center justify-center p-4 bg-red-100 rounded-full hover:bg-red-200 transition-colors"
-                >
-                  <X size={30} className="text-red-500" />
-                </button>
-                <button
-                  onClick={handleKeep}
-                  className="flex items-center justify-center p-4 bg-green-100 rounded-full hover:bg-green-200 transition-colors"
-                >
-                  <Check size={30} className="text-green-500" />
-                </button>
-              </div>
-              
-              <div className="mt-6 text-center">
-                <p className="text-gray-500">
-                  Item {currentItemIndex + 1} of {activeItems.length}
-                </p>
+                
+                <div className="flex items-center justify-between">
+                  {/* Donate button (left side) */}
+                  <button
+                    onClick={() => handleDonate(activeItems[currentItemIndex].id)}
+                    className="flex items-center justify-center p-6 bg-red-100 rounded-full hover:bg-red-200 transition-colors z-10"
+                  >
+                    <X size={40} className="text-red-500" />
+                  </button>
+                  
+                  {/* Card in the middle */}
+                  <div className="h-[350px] w-[250px] relative mx-4">
+                    <SwipeableItemCard 
+                      item={activeItems[currentItemIndex]} 
+                      onSwipeLeft={() => handleDonate(activeItems[currentItemIndex].id)}
+                      onSwipeRight={handleKeep}
+                    />
+                  </div>
+                  
+                  {/* Keep button (right side) */}
+                  <button
+                    onClick={handleKeep}
+                    className="flex items-center justify-center p-6 bg-green-100 rounded-full hover:bg-green-200 transition-colors z-10"
+                  >
+                    <Check size={40} className="text-green-500" />
+                  </button>
+                </div>
+                
+                {/* Item counter positioned below the card */}
+                <div className="absolute bottom-[-40px] left-0 right-0 text-center">
+                  <p className="text-gray-500">
+                    Item {currentItemIndex + 1} of {activeItems.length}
+                  </p>
+                </div>
               </div>
             </>
           ) : activeItems.length === 0 ? (

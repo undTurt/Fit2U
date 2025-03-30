@@ -121,7 +121,7 @@ function MyOutfits() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFFFF] min-h-[calc(100vh-4rem)]">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-[#1C2541]">My Outfits</h1>
       </div>

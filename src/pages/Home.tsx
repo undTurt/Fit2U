@@ -83,7 +83,7 @@ function Home() {
       </div>
 
       {/* Digital Closet Button */}
-      <div className="text-center py-8 bg-[#FFFBE4]">
+      <div className="text-center py-8 bg-[#FFFFFFF]">
         <Link
           to="/closet"
           className="bg-[#1C2541] text-[#F2EDEB] px-8 py-3 rounded-full font-semibold hover:bg-[#B76D68] transition-colors"

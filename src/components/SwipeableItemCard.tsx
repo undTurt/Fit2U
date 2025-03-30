@@ -85,30 +85,6 @@ const SwipeableItemCard: React.FC<SwipeableItemCardProps> = ({
               ></div>
             )}
           </div>
-
-          {/* Action buttons */}
-          <div className="flex justify-between mt-2">
-            <button
-              onClick={() => {
-                setSwipeDirection('left');
-                setExitX(-window.innerWidth);
-                setTimeout(() => onSwipeLeft(item.id), 300);
-              }}
-              className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
-            >
-              <X className="w-4 h-4 text-red-500" />
-            </button>
-            <button
-              onClick={() => {
-                setSwipeDirection('right');
-                setExitX(window.innerWidth);
-                setTimeout(() => onSwipeRight(item.id), 300);
-              }}
-              className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
-            >
-              <Check className="w-4 h-4 text-green-500" />
-            </button>
-          </div>
         </div>
       </motion.div>
     </AnimatePresence>

@@ -3,6 +3,7 @@ import { useClosetStore } from '../store/closetStore';
 import { useNavigate } from 'react-router-dom';
 import OutfitDisplaySection from '../components/outfit/OutfitDisplaySection';
 import WeatherPanel from '../components/weather/WeatherPanel';
+import SaveOutfitForm from '../components/outfit/SaveOutfitForm';
 
 function OutfitGenerator() {
   const { items } = useClosetStore();
@@ -75,6 +76,11 @@ function OutfitGenerator() {
         outfit.push(categories.bottom[Math.floor(Math.random() * categories.bottom.length)].id);
       }
     } else if (weatherCondition === 'Temperate') {
+      // Add hat with 50% probability for temperate weather
+      if (categories.hat.length && Math.random() > 0.5) {
+        outfit.push(categories.hat[Math.floor(Math.random() * categories.hat.length)].id);
+      }
+      
       const includeOvershirt = Math.random() > 0.5;
       if (includeOvershirt && categories.overshirt.length) {
         outfit.push(categories.overshirt[Math.floor(Math.random() * categories.overshirt.length)].id);
@@ -155,7 +161,7 @@ function OutfitGenerator() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFFFFF] min-h-[calc(100vh-4rem)]">
       {showWeatherPanel && (
         <div className="mb-6">
           <WeatherPanel onWeatherSelect={handleWeatherSelect} />
@@ -165,6 +171,16 @@ function OutfitGenerator() {
       <h1 className="text-2xl font-bold mb-6 text-[#1C2541]">Outfit Generator</h1>
 
       {renderActionButtons()}
+
+      {showSaveForm && (
+        <SaveOutfitForm
+          outfitName={outfitName}
+          setOutfitName={setOutfitName}
+          outfitCategory={outfitCategory}
+          setOutfitCategory={setOutfitCategory}
+          onSave={saveOutfit}
+        />
+      )}
 
       <div className="outfit-display-container">
         {generatedOutfit.length > 0 ? (

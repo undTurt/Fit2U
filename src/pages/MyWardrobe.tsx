@@ -221,7 +221,7 @@ function MyWardrobe() {
         "beanie", "cap", "khaki", "sneakers", "hoodie", "flannel",
         "jacket", "coat", "cardigan", "button-up", "blazer",
         "bracelet", "chain", "watch", // Accessories
-        "blouse", "skirt" // Added blouse and skirt
+        "blouse", "skirt", "hat" // Added blouse and skirt
       ];
 
       acceptedFiles.forEach((file) => {
@@ -260,7 +260,7 @@ function MyWardrobe() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFFFF] min-h-[calc(100vh-4rem)]">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-[#1C2541]">My Wardrobe</h1>
         <div className="flex space-x-4">
