@@ -9,6 +9,7 @@ export interface ClothingItem {
   name: string;
   category: string;
   color: string;
+  secondaryColor?: string; // Add this line
   season: string[];
   occasion: string[];
   imageUrl: string;

@@ -51,7 +51,7 @@ function Home() {
           <h1 className="text-4xl font-bold flex items-center space-x-2">
             <span className="relative left-[-10px]">Your</span>
             <RotatingText
-              texts={['Style', 'Wardrobe', 'Impact', 'Expression', 'Schedule']}
+              texts={['Style', 'Wardrobe', 'Impact']}
               mainClassName="px-2 sm:px-2 md:px-3 bg-[#B76D68] text-[#F2EDEB] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
               staggerFrom={"last"}
               initial={{ y: "100%" }}
