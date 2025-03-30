@@ -5,19 +5,27 @@ import { useClosetStore } from '../store/closetStore';
 import ClosetItemCard from '../components/ClosetItemCard';
 import SortControls from '../components/SortControls';
 
-function DigitalCloset() {
+function MyWardrobe() {
   const { items, addItem, removeItem } = useClosetStore();
   const [columns, setColumns] = useState(6); // Default to 6 columns
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
+      const categories = ["shirt", "pants", "jeans", "sweater", "shoes"]; // Predefined categories
+
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
         reader.onload = () => {
           const imageUrl = reader.result as string;
+
+          // Extract category from the file name
+          const fileName = file.name.toLowerCase();
+          const category =
+            categories.find((cat) => fileName.includes(cat)) || "Uncategorized";
+
           addItem({
-            name: file.name.split('.')[0],
-            category: 'Uncategorized',
+            name: file.name.split('.')[0], // Use the file name without extension
+            category, // Extracted category
             color: '#FFFFFF',
             season: [],
             occasion: [],
@@ -36,7 +44,7 @@ function DigitalCloset() {
   return (
     <div className="container mx-auto px-4">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Digital Closet</h1>
+        <h1 className="text-2xl font-bold">My Wardrobe</h1>
         <div {...getRootProps()} className="cursor-pointer">
           <input {...getInputProps()} />
           <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2">
@@ -78,7 +86,7 @@ function DigitalCloset() {
       <div
         className="masonry"
         style={{
-          columnCount: columns, // Dynamically set columns
+          gridTemplateColumns: `repeat(${columns}, 1fr)`, // Dynamically set columns
         }}
       >
         {items.map((item) => (
@@ -95,4 +103,4 @@ function DigitalCloset() {
   );
 }
 
-export default DigitalCloset;
+export default MyWardrobe;

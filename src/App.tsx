@@ -1,7 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import DigitalCloset from './pages/DigitalCloset';
+import MyWardrobe from './pages/MyWardrobe';
+import MyOutfits from './pages/MyOutfits';
+import OutfitGenerator from './pages/OutfitGenerator';
+import Trading from './pages/Trading';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -11,7 +15,11 @@ function App() {
         <main className="container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/closet" element={<DigitalCloset />} />
+            <Route path="/closet" element={<MyWardrobe />} />
+            <Route path="/outfits" element={<MyOutfits />} />
+            <Route path="/outfit-generator" element={<OutfitGenerator />} />
+            <Route path="/trading" element={<Trading />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </main>
       </div>
