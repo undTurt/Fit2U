@@ -260,9 +260,9 @@ function MyWardrobe() {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">My Wardrobe</h1>
+        <h1 className="text-2xl font-bold text-[#1C2541]">My Wardrobe</h1>
         <div className="flex space-x-4">
           <button 
             onClick={() => setShowConfirmDialog(true)}
@@ -274,7 +274,7 @@ function MyWardrobe() {
           
           <div {...getRootProps()} className="cursor-pointer">
             <input {...getInputProps()} />
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2">
+            <button className="bg-[#1C2541] text-[#F2EDEB] px-4 py-2 rounded-md hover:bg-[#B76D68] flex items-center space-x-2">
               <Plus className="w-5 h-5" />
               <span>Add Item</span>
             </button>

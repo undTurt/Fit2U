@@ -55,7 +55,6 @@ function OutfitGenerator() {
 
     // Generate outfit based on weather condition
     if (weatherCondition === 'Cold' || weatherCondition === 'Rainy') {
-      // Always include a hat, undershirt, and overshirt
       if (categories.hat.length) {
         outfit.push(categories.hat[Math.floor(Math.random() * categories.hat.length)].id);
       }
@@ -69,7 +68,6 @@ function OutfitGenerator() {
         outfit.push(categories.bottom[Math.floor(Math.random() * categories.bottom.length)].id);
       }
     } else if (weatherCondition === 'Hot') {
-      // Do not include an overshirt, only undershirt and bottom
       if (categories.undershirt.length) {
         outfit.push(categories.undershirt[Math.floor(Math.random() * categories.undershirt.length)].id);
       }
@@ -77,7 +75,6 @@ function OutfitGenerator() {
         outfit.push(categories.bottom[Math.floor(Math.random() * categories.bottom.length)].id);
       }
     } else if (weatherCondition === 'Temperate') {
-      // Include either an overshirt or undershirt, but not both
       const includeOvershirt = Math.random() > 0.5;
       if (includeOvershirt && categories.overshirt.length) {
         outfit.push(categories.overshirt[Math.floor(Math.random() * categories.overshirt.length)].id);
@@ -89,14 +86,12 @@ function OutfitGenerator() {
       }
     }
 
-    // Ensure shoes are always included
     if (categories.shoes.length && !outfit.some(id => categories.shoes.find(item => item.id === id))) {
       outfit.push(categories.shoes[Math.floor(Math.random() * categories.shoes.length)].id);
     }
 
-    // Always include an accessory slot (empty if no accessory is generated)
     if (categories.accessories.length) {
-      const includeAccessory = Math.random() > 0.5; // Randomly decide to include an accessory
+      const includeAccessory = Math.random() > 0.5;
       if (includeAccessory) {
         outfit.push(categories.accessories[Math.floor(Math.random() * categories.accessories.length)].id);
       }
@@ -132,7 +127,7 @@ function OutfitGenerator() {
         <div>
           <button
             onClick={generateOutfit}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md shadow flex items-center space-x-2"
+            className="bg-[#1C2541] hover:bg-[#B76D68] text-[#F2EDEB] py-2 px-4 rounded-md shadow flex items-center space-x-2"
           >
             <span>Generate Outfit</span>
           </button>
@@ -140,16 +135,16 @@ function OutfitGenerator() {
         <div>
           <button
             onClick={toggleWeatherPanel}
-            className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow flex items-center space-x-2"
+            className="bg-[#1C2541] hover:bg-[#B76D68] text-[#F2EDEB] py-2 px-4 rounded-md shadow flex items-center space-x-2"
           >
-            <span>Toggle Weather Panel</span>
+            <span>ClimateFit</span>
           </button>
         </div>
         <div>
           {generatedOutfit.length > 0 && (
             <button
               onClick={() => setShowSaveForm(true)}
-              className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md shadow flex items-center space-x-2"
+              className="bg-[#1C2541] hover:bg-[#B76D68] text-[#F2EDEB] py-2 px-4 rounded-md shadow flex items-center space-x-2"
             >
               <span>Save to My Outfits</span>
             </button>
@@ -160,14 +155,14 @@ function OutfitGenerator() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 relative" style={{ minHeight: "calc(100vh - 80px)" }}>
+    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
       {showWeatherPanel && (
         <div className="mb-6">
           <WeatherPanel onWeatherSelect={handleWeatherSelect} />
         </div>
       )}
 
-      <h1 className="text-2xl font-bold mb-6">Outfit Generator</h1>
+      <h1 className="text-2xl font-bold mb-6 text-[#1C2541]">Outfit Generator</h1>
 
       {renderActionButtons()}
 

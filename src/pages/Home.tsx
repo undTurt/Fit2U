@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { RefreshCw, Search, DollarSign, Palette, CloudRain, User } from 'lucide-react';
-import RotatingText from '../components/RotatingText'; // Import the RotatingText component
+import RotatingText from '../components/RotatingText';
+import SplitText from '../components/ReactBits/SplitText'; // Import SplitText
 
 function Home() {
   const features = [
@@ -42,11 +43,15 @@ function Home() {
     },
   ];
 
+  const handleAnimationComplete = () => {
+    console.log('All letters have animated!');
+  };
+
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#FFFBE4]">
+    <div className="min-h-[calc(100vh-4rem)] bg-[#FFFFFF]">
       {/* Hero Section */}
-      <div className="text-center py-16 bg-[#1C2541] text-[#F2EDEB]">
-        <div className="flex flex-col items-center justify-center space-y-4">
+      <div className="text-center py-24 md:py-32 bg-[#1C2541] text-[#F2EDEB]">
+        <div className="flex flex-col items-center justify-center space-y-6">
           {/* Rotating Text */}
           <h1 className="text-4xl font-bold flex items-center space-x-2">
             <span className="relative left-[-10px]">Your</span>
@@ -63,9 +68,17 @@ function Home() {
               rotationInterval={2700}
             />
           </h1>
-          <p className="text-xl">
-            Organize, plan, and elevate your style with AI-powered insights
-          </p>
+          <SplitText
+            text="Organize, plan, and elevate your style"
+            className="text-xl"
+            delay={30}
+            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+            easing={(t) => (--t * t * t + 1)} // Replace with a cubic easing function
+            threshold={0.2}
+            rootMargin="-50px"
+            onLetterAnimationComplete={handleAnimationComplete}
+          />
         </div>
       </div>
 
@@ -75,12 +88,13 @@ function Home() {
           to="/closet"
           className="bg-[#1C2541] text-[#F2EDEB] px-8 py-3 rounded-full font-semibold hover:bg-[#B76D68] transition-colors"
         >
-          Open Your My Wardrobe
+          Open Your Digital Wardrobe
         </Link>
       </div>
 
       {/* Features Section */}
       <div className="container mx-auto px-4 py-16">
+        <h2 className="text-4xl font-bold text-center mb-12 text-[#1C2541]">Our Features</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature) => (
             <div
@@ -92,6 +106,34 @@ function Home() {
               <p className="text-black">{feature.description}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Our Story Section */}
+      <div className="bg-[#1C2541] text-[#F2EDEB] py-20">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <h2 className="text-4xl font-extrabold text-center mb-10 tracking-wide">
+            Our Story
+          </h2>
+          <div className="space-y-6 text-lg leading-relaxed text-justify md:text-center">
+            <p className="max-w-4xl mx-auto">
+              <span className="font-semibold">Fit2U</span> was born from a simple idea: fashion should be effortless, personal, and sustainable. 
+              We saw a problem—people spend too much time picking outfits, struggle to find clothes that truly fit, 
+              and often let great pieces go to waste. With fast fashion contributing to pollution and overflowing closets 
+              filled with unworn items, we knew there had to be a better way.
+            </p>
+            <p className="max-w-4xl mx-auto">
+              That’s why we created <span className="font-semibold">Fit2U</span>—a smart styling assistant that not only helps you curate the perfect wardrobe 
+              but also makes shopping smarter and more sustainable. Our <span className="italic">Style & Swap</span> feature gives clothes a second life, 
+              reducing waste while connecting people within their communities. Our smart shopping tool ensures that new 
+              purchases truly fit your style, budget, and existing wardrobe.
+            </p>
+            <p className="max-w-4xl mx-auto">
+              We believe that fashion should work for you—not the other way around. By combining personalization, 
+              sustainability, and convenience, we aim to transform how people shop, style, and swap for a future where 
+              looking good doesn’t come at the cost of the planet.
+            </p>
+          </div>
         </div>
       </div>
     </div>

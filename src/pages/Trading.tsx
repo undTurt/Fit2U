@@ -10,6 +10,7 @@ function Trading() {
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [showDonationPile, setShowDonationPile] = useState(false);
   const [activeItems, setActiveItems] = useState<typeof items>([]);
+  const [swipeDirection, setSwipeDirection] = useState<string | null>(null);
   
   // Use refs to track whether we've loaded from localStorage
   const hasLoadedFromStorage = useRef(false);
@@ -76,6 +77,9 @@ function Trading() {
   const moveToNextItem = () => {
     if (currentItemIndex < activeItems.length - 1) {
       setCurrentItemIndex(prev => prev + 1);
+    } else {
+      // If it's the last item, reset the swipe direction
+      setSwipeDirection(null);
     }
   };
 
@@ -86,12 +90,12 @@ function Trading() {
   const donatedItems = items.filter(item => donationPile.includes(item.id));
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Donation Center</h1>
+        <h1 className="text-2xl font-bold text-[#1C2541]">Donation Center</h1>
         <button
           onClick={() => setShowDonationPile(!showDonationPile)}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          className="px-4 py-2 bg-[#1C2541] text-[#F2EDEB] rounded-md hover:bg-[#B76D68] transition-colors"
         >
           {showDonationPile ? 'Back to Donation' : `Donation Pile (${donationPile.length})`}
         </button>
@@ -99,7 +103,7 @@ function Trading() {
 
       {showDonationPile ? (
         <>
-          <h2 className="text-xl font-semibold mb-4">Your Donation Pile</h2>
+          <h2 className="text-xl font-semibold mb-4 text-[#1C2541]">Your Donation Pile</h2>
           <DonationPile items={donatedItems} onRestore={handleRestoreItem} />
         </>
       ) : (
@@ -145,7 +149,7 @@ function Trading() {
               </p>
               <button
                 onClick={() => setShowDonationPile(true)}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                className="px-4 py-2 bg-[#1C2541] text-[#F2EDEB] rounded-md hover:bg-[#B76D68] transition-colors"
               >
                 View Donation Pile
               </button>
@@ -157,7 +161,7 @@ function Trading() {
               </p>
               <button
                 onClick={() => setCurrentItemIndex(0)}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center mx-auto"
+                className="px-4 py-2 bg-[#1C2541] text-[#F2EDEB] rounded-md hover:bg-[#B76D68] transition-colors flex items-center justify-center mx-auto"
               >
                 <Undo size={16} className="mr-2" />
                 Start Over

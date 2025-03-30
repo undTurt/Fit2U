@@ -121,20 +121,20 @@ function MyOutfits() {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 py-6 bg-[#FFFBE4] min-h-[calc(100vh-4rem)]">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">My Outfits</h1>
+        <h1 className="text-2xl font-bold text-[#1C2541]">My Outfits</h1>
       </div>
 
       <div className="mb-8 p-4 border rounded-md bg-gray-50">
-        <h2 className="text-xl font-semibold mb-4">Create a New Outfit</h2>
+        <h2 className="text-xl font-semibold mb-4 text-[#1C2541]">Create a New Outfit</h2>
         <div className="flex gap-4 flex-wrap">
           <input
             type="text"
             placeholder="Outfit Name"
             value={newOutfit.name}
             onChange={(e) => setNewOutfit({ ...newOutfit, name: e.target.value })}
-            className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm w-full sm:w-64"
+            className="border-gray-300 rounded-md shadow-sm focus:ring-[#1C2541] focus:border-[#1C2541] sm:text-sm w-full sm:w-64"
           />
           <input
             type="text"
@@ -143,11 +143,11 @@ function MyOutfits() {
             onChange={(e) =>
               setNewOutfit({ ...newOutfit, category: e.target.value })
             }
-            className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm w-full sm:w-64"
+            className="border-gray-300 rounded-md shadow-sm focus:ring-[#1C2541] focus:border-[#1C2541] sm:text-sm w-full sm:w-64"
           />
           <button
             onClick={createOutfit}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2 mt-2 sm:mt-0"
+            className="bg-[#1C2541] text-[#F2EDEB] px-4 py-2 rounded-md hover:bg-[#B76D68] flex items-center space-x-2 mt-2 sm:mt-0"
           >
             <Plus className="w-5 h-5" />
             <span>Create Outfit</span>
@@ -221,9 +221,9 @@ function MyOutfits() {
 
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">My Outfits</h2>
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {outfits.map((outfit) => (
-            <div key={outfit.id} className="p-4 border rounded-md relative">
+            <div key={outfit.id} className="bg-white p-4 border rounded-md shadow-sm hover:shadow-md transition-shadow relative">
               <button 
                 onClick={() => deleteOutfit(outfit.id)}
                 className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200"
@@ -232,32 +232,36 @@ function MyOutfits() {
               </button>
               
               <h3 className="text-lg font-bold">{outfit.name}</h3>
-              <p className="text-sm text-gray-500">{outfit.category}</p>
+              <p className="text-sm text-gray-500 mb-2">{outfit.category}</p>
               
-              <div className="flex space-x-2 mt-2">
+              {/* Color palette */}
+              <div className="flex flex-wrap gap-1 mb-3">
                 {outfit.colors.map((color, index) => (
                   <div
                     key={index}
-                    className="w-6 h-6 rounded-full border border-gray-300"
+                    className="w-5 h-5 rounded-full border border-gray-300"
                     style={{ backgroundColor: color }}
                   ></div>
                 ))}
               </div>
               
-              <div className="grid grid-cols-3 gap-2 mt-4">
+              {/* Outfit items grid - maintain aspect ratio without cropping */}
+              <div className="grid grid-cols-3 gap-2">
                 {outfit.items.map((itemId) => {
                   const item = items.find((i) => i.id === itemId);
                   return item ? (
-                    <img
-                      key={item.id}
-                      src={item.imageUrl}
-                      alt={item.name}
-                      className="w-full h-24 object-cover rounded-md"
-                    />
+                    <div key={item.id} className="aspect-square relative bg-gray-50 rounded overflow-hidden">
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className="w-full h-full object-contain" // object-contain instead of object-cover
+                        title={item.name}
+                      />
+                    </div>
                   ) : (
                     <div 
                       key={itemId} 
-                      className="w-full h-24 bg-gray-200 rounded-md flex items-center justify-center"
+                      className="aspect-square bg-gray-200 rounded-md flex items-center justify-center"
                     >
                       <span className="text-xs text-gray-500">Item not found</span>
                     </div>
@@ -266,6 +270,12 @@ function MyOutfits() {
               </div>
             </div>
           ))}
+          
+          {outfits.length === 0 && (
+            <div className="col-span-full text-center py-8 bg-gray-50 rounded-md">
+              <p className="text-gray-500">No outfits created yet. Create your first outfit above!</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

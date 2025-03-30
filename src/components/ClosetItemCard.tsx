@@ -6,19 +6,21 @@ interface ClosetItemCardProps {
     name: string;
     category: string;
     color: string;
-    secondaryColor?: string; // Added optional secondaryColor property
+    secondaryColor?: string;
     imageUrl: string;
   };
   onEdit: (item: any) => void;
   onDelete: (id: string) => void;
-  hideActions?: boolean; // Added optional hideActions prop
+  hideActions?: boolean;
 }
 
 function ClosetItemCard({ item, onEdit, onDelete, hideActions = false }: ClosetItemCardProps) {
   return (
-    <div className="masonry-item">
-      <img src={item.imageUrl} alt={item.name} />
-      <div className="p-4">
+    <div className="masonry-item bg-white rounded-md overflow-hidden shadow-sm border border-white">
+      <div className="aspect-square bg-white">
+        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-contain" />
+      </div>
+      <div className="p-4 bg-white">
         <h3 className="font-semibold">{item.name}</h3>
         <p className="text-sm text-gray-500">{item.category}</p>
         <div className="flex items-center space-x-2 mt-2">
