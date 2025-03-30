@@ -218,7 +218,10 @@ function MyWardrobe() {
     onDrop: (acceptedFiles) => {
       const categories = [
         "shirt", "pants", "jeans", "sweater", "shoes",
-        "beanie", "cap", "khaki", "sneakers", "hoodie", "flannel"
+        "beanie", "cap", "khaki", "sneakers", "hoodie", "flannel",
+        "jacket", "coat", "cardigan", "button-up", "blazer",
+        "bracelet", "chain", "watch", // Accessories
+        "blouse", "skirt" // Added blouse and skirt
       ];
 
       acceptedFiles.forEach((file) => {
